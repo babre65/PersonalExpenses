@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BaseServiceImpl<T extends BaseEntity, R extends BaseRepository<T, ID>, ID> implements BaseService<T, ID> {
+public abstract class BaseServiceImpl<T extends BaseEntity, R extends BaseRepository<T, ID>, ID> implements BaseService<T, ID> {
 
     private final R repository;
 
