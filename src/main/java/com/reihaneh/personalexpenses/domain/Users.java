@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class User extends BaseEntity{
+public class Users extends BaseEntity{
 
     @Column
     private String firstName;

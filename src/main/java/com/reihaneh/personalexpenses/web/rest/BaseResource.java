@@ -2,13 +2,14 @@ package com.reihaneh.personalexpenses.web.rest;
 
 import com.reihaneh.personalexpenses.domain.BaseEntity;
 import com.reihaneh.personalexpenses.service.BaseService;
+import com.reihaneh.personalexpenses.service.dto.BaseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-public abstract class BaseResource<T extends BaseEntity, S extends BaseService<T, ID>, ID> {
+public abstract class BaseResource<T extends BaseDto, S extends BaseService<T, ID>, ID> {
 
     private final S service;
 
@@ -49,6 +50,12 @@ public abstract class BaseResource<T extends BaseEntity, S extends BaseService<T
 
         List<T> all = service.findAll();
         return ResponseEntity.ok().body(all);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable ID id){
+        service.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
 }

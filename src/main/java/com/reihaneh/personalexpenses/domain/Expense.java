@@ -37,7 +37,7 @@ public class Expense extends BaseEntity {
     private String description;
 
     @ManyToOne
-    private User user;
+    private Users user;
 
     @ManyToOne
     private Category category;
