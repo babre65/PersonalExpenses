@@ -3,12 +3,11 @@ package com.reihaneh.personalexpenses.service.impl;
 import com.reihaneh.personalexpenses.domain.BaseEntity;
 import com.reihaneh.personalexpenses.repository.BaseRepository;
 import com.reihaneh.personalexpenses.service.BaseService;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 public abstract class BaseServiceImpl<T extends BaseEntity, R extends BaseRepository<T, ID>, ID> implements BaseService<T, ID> {
 
     private final R repository;
