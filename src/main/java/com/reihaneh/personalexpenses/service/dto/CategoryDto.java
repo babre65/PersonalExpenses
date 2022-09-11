@@ -15,5 +15,5 @@ public class CategoryDto extends BaseDto {
 
     private String name;
 
-    private List<Expense> expenses = new ArrayList<>();
+    private List<ExpenseDto> expenses = new ArrayList<>();
 }

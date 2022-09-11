@@ -32,5 +32,5 @@ public class UserDto extends BaseDto {
 
     private String password;
 
-    private List<Expense> expenses = new ArrayList<>();
+    private List<ExpenseDto> expenses = new ArrayList<>();
 }
