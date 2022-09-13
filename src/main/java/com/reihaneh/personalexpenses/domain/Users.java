@@ -5,6 +5,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,18 +16,20 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Users extends BaseEntity{
+public class Users extends BaseEntity {
 
-    @Column
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column
+    @Column(name = "last_name")
     private String lastName;
 
     @Column
     private ZonedDateTime birthDate;
 
-    @Column
+    @Email
+    @NotEmpty
+    @Column(unique = true)
     private String email;
 
     @Column
@@ -36,9 +41,11 @@ public class Users extends BaseEntity{
     @Column
     private Boolean active;
 
+    @NotBlank
     @Column
     private String username;
 
+    @NotBlank
     @Column
     private String password;
 

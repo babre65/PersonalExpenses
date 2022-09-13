@@ -14,25 +14,25 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Slf4j
 public class PersonalExpensesApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PersonalExpensesApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PersonalExpensesApplication.class, args);
+    }
 
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-	@Bean
-	CommandLineRunner run(UserService userService) {
-		return args -> {
-			UserDto userDto = new UserDto();
-			userDto.setFirstName("Ali");
-			userDto.setUsername("ali");
-			userDto.setPassword("123");
-			userDto = userService.save(userDto);
-			log.info("saved user : {}", userDto);
-		};
-	}
+    @Bean
+    CommandLineRunner run(UserService userService) {
+        return args -> {
+            UserDto userDto = new UserDto();
+            userDto.setFirstName("Ali");
+            userDto.setUsername("ali");
+            userDto.setPassword("123");
+            userDto = userService.save(userDto);
+            log.info("saved user : {}", userDto);
+        };
+    }
 }

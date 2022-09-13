@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -14,26 +15,23 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 public class ExpenseDto extends BaseDto {
 
+    @NotBlank
     private ExpenseType type;
 
-
+    @NotBlank
     private LocalDateTime purchaseDate;
 
-
+    @NotBlank
     private PaymentType paymentType;
 
-
+    @NotBlank
     private BigDecimal amount;
-
 
     private String note;
 
-
     private String description;
 
-
     private Long userId;
-
 
     private Long categoryId;
 }

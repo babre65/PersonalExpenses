@@ -39,7 +39,6 @@ public class UserResource extends BaseResource<UserDto, UserService, Long> {
         this.service = service;
     }
 
-
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);

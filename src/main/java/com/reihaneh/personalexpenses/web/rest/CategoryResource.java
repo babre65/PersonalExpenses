@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/categories")
 @Slf4j
 @Tag(name = "Category")
-public class CategoryResource extends BaseResource<CategoryDto, CategoryService, Long>{
+public class CategoryResource extends BaseResource<CategoryDto, CategoryService, Long> {
 
     public CategoryResource(CategoryService service) {
         super(service, log);

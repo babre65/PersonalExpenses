@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -18,15 +19,19 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 public class Expense extends BaseEntity {
 
+    @NotBlank
     @Column
     private ExpenseType type;
 
-    @Column
+    @NotBlank
+    @Column(name = "purchase_date")
     private LocalDateTime purchaseDate;
 
-    @Column
+    @NotBlank
+    @Column(name = "payment_type")
     private PaymentType paymentType;
 
+    @NotBlank
     @Column
     private BigDecimal amount;
 
