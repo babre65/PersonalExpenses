@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public abstract class BaseServiceImpl<T extends BaseEntity, D extends BaseDto, R extends BaseRepository<T, ID>, ID> implements BaseService<D, ID> {
 
     @Autowired
-    private ModelMapper mapper;
+    protected ModelMapper mapper;
     private final R repository;
 
     private final Class<T> entityClass;

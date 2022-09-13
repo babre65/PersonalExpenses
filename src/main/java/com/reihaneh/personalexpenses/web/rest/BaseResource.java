@@ -29,7 +29,7 @@ public abstract class BaseResource<D extends BaseDto, S extends BaseService<D, I
 
         D save = service.save(dto);
         log.info("Data saved : {}", save);
-        return ResponseEntity.ok().body(save);
+        return ResponseEntity.status(HttpStatus.CREATED).header("Content-Type: application/json; charset=UTF-8").body(save);
     }
 
 
@@ -41,7 +41,7 @@ public abstract class BaseResource<D extends BaseDto, S extends BaseService<D, I
 
         D save = service.save(dto);
         log.info("Data saved : {}", save);
-        return ResponseEntity.ok().body(save);
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type: application/json; charset=UTF-8").body(save);
     }
 
 
@@ -52,7 +52,7 @@ public abstract class BaseResource<D extends BaseDto, S extends BaseService<D, I
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id should not be null");
 
         Optional<D> result = service.findById(id);
-        return result.map(t -> ResponseEntity.ok().body(t)).
+        return result.map(t -> ResponseEntity.status(HttpStatus.FOUND).header("Content-Type: application/json; charset=UTF-8").body(t)).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Value not found for Id: " + id));
 
     }
@@ -62,7 +62,7 @@ public abstract class BaseResource<D extends BaseDto, S extends BaseService<D, I
         log.info("Request to get all data. ");
 
         List<D> all = service.findAll();
-        return ResponseEntity.ok().body(all);
+        return ResponseEntity.status(HttpStatus.FOUND).header("Content-Type: application/json; charset=UTF-8").body(all);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -72,7 +72,7 @@ public abstract class BaseResource<D extends BaseDto, S extends BaseService<D, I
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id should not be null");
 
         service.deleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type: application/json; charset=UTF-8").build();
     }
 
 }
