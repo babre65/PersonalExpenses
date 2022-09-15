@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.reihaneh.personalexpenses.config.ApplicationProperties;
 import com.reihaneh.personalexpenses.service.UserService;
 import com.reihaneh.personalexpenses.service.dto.UserDto;
 import com.reihaneh.personalexpenses.web.rest.util.CustomUtilities;
@@ -33,10 +34,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class UserResource extends BaseResource<UserDto, UserService, Long> {
 
     private final UserService service;
+    private final ApplicationProperties properties;
 
-    public UserResource(UserService service) {
+    public UserResource(UserService service, ApplicationProperties properties) {
         super(service, log);
         this.service = service;
+        this.properties = properties;
     }
 
     @GetMapping("/token/refresh")
@@ -48,7 +51,7 @@ public class UserResource extends BaseResource<UserDto, UserService, Long> {
         }
         try {
             String refresh_token = authorizationHeader.substring("Bearer ".length());
-            Algorithm algorithm = CustomUtilities.getHMAC256Algorithm("secret");
+            Algorithm algorithm = CustomUtilities.getHMAC256Algorithm(properties.getAppSecurity().getJwtSecret());
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(refresh_token);
             String username = decodedJWT.getSubject();

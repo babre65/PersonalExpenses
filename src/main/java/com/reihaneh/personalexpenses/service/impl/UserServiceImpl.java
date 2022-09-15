@@ -21,6 +21,7 @@ import java.util.Optional;
 public class UserServiceImpl extends BaseServiceImpl<Users, UserDto, UserRepository, Long> implements UserService, UserDetailsService {
 
     private final UserRepository repository;
+
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder) {

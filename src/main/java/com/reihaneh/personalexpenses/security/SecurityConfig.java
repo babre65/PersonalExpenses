@@ -1,5 +1,6 @@
 package com.reihaneh.personalexpenses.security;
 
+import com.reihaneh.personalexpenses.config.ApplicationProperties;
 import com.reihaneh.personalexpenses.config.filter.CustomAuthenticationFilter;
 import com.reihaneh.personalexpenses.config.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final ApplicationProperties properties;
 
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
@@ -40,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        http.authorizeRequests().anyRequest().authenticated();
 
-        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
-        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean(), properties));
+        http.addFilterBefore(new CustomAuthorizationFilter(properties), UsernamePasswordAuthenticationFilter.class);
     }
 }

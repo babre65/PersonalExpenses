@@ -3,6 +3,7 @@ package com.reihaneh.personalexpenses.config.filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.reihaneh.personalexpenses.config.ApplicationProperties;
 import com.reihaneh.personalexpenses.web.rest.util.CustomUtilities;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,9 +29,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+    private final ApplicationProperties properties;
     private final AuthenticationManager authenticationManager;
 
-    public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public CustomAuthenticationFilter(AuthenticationManager authenticationManager, ApplicationProperties properties) {
+        this.properties = properties;
         this.authenticationManager = authenticationManager;
     }
 
@@ -50,7 +53,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
-        Algorithm algorithm = CustomUtilities.getHMAC256Algorithm("secret");
+        Algorithm algorithm = CustomUtilities.getHMAC256Algorithm(properties.getAppSecurity().getJwtSecret());
         String access_token = JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))

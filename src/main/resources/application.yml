@@ -13,3 +13,9 @@ spring:
     console:
       path: /h2-console
       enabled: true
+
+
+application:
+  appSecurity:
+    jwtSecret: PersonalAppSecret
+
