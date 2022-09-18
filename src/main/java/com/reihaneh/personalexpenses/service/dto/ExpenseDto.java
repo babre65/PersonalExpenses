@@ -5,6 +5,7 @@ import com.reihaneh.personalexpenses.domain.enums.PaymentType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
+@ToString(callSuper = true)
 public class ExpenseDto extends BaseDto {
 
     @NotBlank

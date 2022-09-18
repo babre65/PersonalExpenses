@@ -16,4 +16,10 @@ public abstract class BaseDto {
 //    private String modifiedBy;
 //
 //    private LocalDateTime modifiedDate;
+
+
+    @Override
+    public String toString() {
+        return "> id=" + id;
+    }
 }

@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,6 +19,7 @@ public class Expense extends BaseEntity {
 
     @NotBlank
     @Column
+    @Enumerated(EnumType.STRING)
     private ExpenseType type;
 
     @NotBlank
@@ -29,6 +28,7 @@ public class Expense extends BaseEntity {
 
     @NotBlank
     @Column(name = "payment_type")
+    @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 
     @NotBlank

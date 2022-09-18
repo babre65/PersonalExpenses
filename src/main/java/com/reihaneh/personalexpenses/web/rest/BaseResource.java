@@ -52,7 +52,7 @@ public abstract class BaseResource<D extends BaseDto, S extends BaseService<D, I
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id should not be null");
 
         Optional<D> result = service.findById(id);
-        return result.map(t -> ResponseEntity.status(HttpStatus.FOUND).header("Content-Type: application/json; charset=UTF-8").body(t)).
+        return result.map(t -> ResponseEntity.status(HttpStatus.OK).header("Content-Type: application/json; charset=UTF-8").body(t)).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Value not found for Id: " + id));
 
     }
@@ -62,7 +62,7 @@ public abstract class BaseResource<D extends BaseDto, S extends BaseService<D, I
         log.info("Request to get all data. ");
 
         List<D> all = service.findAll();
-        return ResponseEntity.status(HttpStatus.FOUND).header("Content-Type: application/json; charset=UTF-8").body(all);
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type: application/json; charset=UTF-8").body(all);
     }
 
     @DeleteMapping(path = "/{id}")

@@ -24,6 +24,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
+    private final String[] whitelist = {
+            "/h2-console/**",
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            // "/swagger-ui.html"
+    };
+
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers(whitelist);
+//    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
@@ -38,7 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/h2-console").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+//                .antMatchers("/v3/api-docs/**").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/api/users/token/refresh").permitAll()
                 .antMatchers("/api/**").authenticated();
 
 //        http.authorizeRequests().anyRequest().authenticated();
