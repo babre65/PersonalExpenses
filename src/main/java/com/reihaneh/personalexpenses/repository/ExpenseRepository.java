@@ -24,7 +24,7 @@ public interface ExpenseRepository extends BaseRepository<Expense, Long> {
     List<UserExpensesDto> getCurrentUserExpensesByCategory(String username, Long categoryId);
 
 
-    @Query(value = "SELECT Sum(AMOUNT) as totalAmount , MONTHNAME(PURCHASE_DATE) as monthName, YEAR(PURCHASE_DATE) as year, TYPE as type" +
+    @Query(value = "SELECT Sum(AMOUNT) as totalAmount , MONTHNAME(PURCHASE_DATE) as monthName, YEAR(PURCHASE_DATE) as years, TYPE as type" +
             " FROM EXPENSE where USER_ID = 1 group by MONTH(PURCHASE_DATE ), YEAR(PURCHASE_DATE )  ,TYPE", nativeQuery = true)
     List<Map<String, Object>> getCurrentUserMonthlyTotalExpenses(String username);
 }
